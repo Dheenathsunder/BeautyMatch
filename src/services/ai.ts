@@ -21,7 +21,9 @@ export const getSkinAnalysis = async (
   concerns: string[]
 ): Promise<RecommendationResponse> => {
   try {
-    const response = await fetch("http://localhost:8000/analyze", {
+    // Use relative path for Vercel; Vite proxy or Vercel rewrite handles the rest
+    const apiUrl = import.meta.env.VITE_API_URL || "/api";
+    const response = await fetch(`${apiUrl}/analyze`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
